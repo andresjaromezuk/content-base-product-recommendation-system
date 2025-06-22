@@ -1,4 +1,9 @@
 # %%
+import platform
+print(platform.machine())
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras import applications
+# %%
 from opensearchpy import Field, Boolean, Float, Integer, Document, Keyword, Text, DenseVector, Nested, Date, Object
 
 class KNNVector(Field):
@@ -16,14 +21,17 @@ index_name_1 = 'items'
 
 class Item(Document):
     item_id = Keyword()
+    variant_id = Keyword()
     image_url = Keyword()
     title = Text()
     description = Text()
     created_at = Date()
-    
-
     text_vector = KNNVector(
        839,
+        method
+    )
+    image_vector = KNNVector(
+       2048,
         method
     )
     class Index:
